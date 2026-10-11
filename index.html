@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>PCP Solver</title>
+  <meta name="description" content="Post's Correspondence Problem solver using brute-force BFS search.">
+  <meta name="theme-color" content="#1F3864">
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="PCP Solver">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="app-header">
+    <h1>🧩 PCP Solver</h1>
+    <p>Post's Correspondence Problem · brute-force BFS search</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <label for="preset">Load a test case</label>
+      <select id="preset"></select>
+
+      <label for="listA">List A (comma-separated)</label>
+      <input id="listA" type="text" value="a, ab, bba" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+
+      <label for="listB">List B (comma-separated)</label>
+      <input id="listB" type="text" value="baa, aa, bb" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+
+      <label for="depth">Maximum depth (sequence length): <strong id="depthVal">10</strong></label>
+      <input id="depth" type="range" min="1" max="25" value="10">
+
+      <button id="solveBtn" type="button" class="primary">Solve</button>
+      <button id="installBtn" type="button" class="secondary" hidden>Install app</button>
+    </section>
+
+    <section id="output" aria-live="polite"></section>
+
+    <section class="card" id="logCard" hidden>
+      <h2>Results log (this session)</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>A</th><th>B</th><th>Depth</th><th>Result</th><th>Sequence</th></tr></thead>
+          <tbody id="logBody"></tbody>
+        </table>
+      </div>
+      <button id="clearLog" type="button" class="secondary">Clear log</button>
+    </section>
+
+    <details class="card">
+      <summary>About: why three outcomes?</summary>
+      <p>
+        PCP is <strong>undecidable</strong> but <strong>semi-decidable</strong>. If a solution exists, BFS will
+        eventually find it (and it will be the shortest). If none exists, the search may never stop on its own,
+        so a depth limit is needed. A result of <em>No solution</em> is only reported when it is proven (every
+        branch pruned, or a length argument). Otherwise the honest answer is <em>Inconclusive</em>.
+      </p>
+    </details>
+
+    <p class="footer">Theory of Computation · TAE-II</p>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
